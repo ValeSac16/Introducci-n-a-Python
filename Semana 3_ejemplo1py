@@ -1,0 +1,27 @@
+# Comentario
+# Declaración
+costo:float = 0
+porcentaje_utilidad:float = 0
+porcentaje_impuesto:float = 0
+monto_utilidad:float = 0
+monto_impuesto:float = 0
+precios_sin_impuesto:float = 0
+precio_total:float = 0
+
+# Entradas
+print("Bienvenidos a la calculadora maravillosa")
+costo = float(input("Digite el costo "))
+porcentaje_utilidad = float(input("Digite el porcentaje utilidad "))
+porcentaje_impuesto = float(input("Digite el porcentaje impuesto "))
+
+
+#Procesamientos
+monto_utilidad = costo + porcentaje_utilidad
+precios_sin_impuesto = costo + monto_utilidad
+monto_impuesto = precios_sin_impuesto + porcentaje_impuesto
+precio_total = precios_sin_impuesto + monto_impuesto
+
+#salidas
+print("Precio total ", precio_total)
+print("monto impuesto ", monto_impuesto)
+print("Monto utilidad ", monto_utilidad)
