@@ -1,0 +1,34 @@
+#Ejercicio_2
+
+compran_iphone: bool
+rendimiento_academico: bool
+hogar: bool
+
+promedio_general: float
+materia1: float
+materia2: float
+materia3: float
+materia4: float
+
+lavados_auto_abuela: int
+lavados_auto_mama: int
+
+promedio_general = float(input("¿Cuál fue el promedio general de Carmen? "))
+materia1 = float(input("Nota de la materia 1: " ))
+materia2 = float(input("Nota de la materia 2: " ))
+materia3 = float(input("Nota de la materia 3: " ))
+materia4 = float(input("Nota de la materia 4: " ))
+
+lavados_auto_abuela = int(input("¿Cuántas veces lavó el auto de la abuela? "))
+lavados_auto_mama = int(input("¿Cuántas veces lavó el auto de la mamá? "))
+
+rendimiento_academico = (promedio_general >= 80) and (materia1 >= 75) and (materia2 >= 75) and (materia3 >= 75) and (materia4 >= 75)
+
+hogar = (lavados_auto_abuela >= 8) and (lavados_auto_mama >= 8) or (lavados_auto_abuela + lavados_auto_mama >= 12)
+
+compran_iphone = rendimiento_academico and hogar
+
+if compran_iphone:
+    print("El estudiante puede comprar un iPhone.")
+else:
+    print("El estudiante no puede comprar un iPhone.")
