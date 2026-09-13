@@ -1,0 +1,45 @@
+#Ejercicio_1
+opcion1: bool
+clima_soleado: bool
+presupuesto: float
+fin_de_mes: bool
+
+opcion2: bool
+tareas_carlos: int
+tareas_maria: int
+
+opcion3: bool
+pelicula_coyote: bool
+cupones: bool
+entradas: bool
+cine: bool
+
+clima_soleado = input("¿El clima está soleado? ").lower()
+presupuesto = float(input("Ingrese el presupuesto disponible: "))
+fin_de_mes = input("¿Es fin de mes? ").lower()
+
+tareas_carlos = int(input("¿Cuantas tareas pendientes tiene Carlos? "))
+tareas_maria = int(input("¿Cuantas tareas pendientes tiene María? "))
+
+pelicula_coyote = input("¿El cine está presentando la película de El coyote vs Acme? ").lower()
+cupones = input("¿La mamá de María les obsequió cupones? ").lower()
+entradas = input("¿El papá de carlos les regaló las entradas? ").lower()
+
+opcion1 = (clima_soleado == "si") and (presupuesto >= 100000) and (fin_de_mes == "si")
+opcion2 = (presupuesto >= 10000) and (tareas_maria == 0) and (tareas_carlos == 0)
+opcion3 = (pelicula_coyote == "si") and ((cupones == "si") or (entradas == "si"))
+
+cine = opcion1 or opcion2 or opcion3
+
+if cine:
+    print("Sí es viable realizar una actividad, puede ser: ")
+    
+    if opcion1:
+        print("  Se puede realizar la Opción 1 (Ir a la cabina de playa).")
+    if opcion2:
+        print("  Se puede realizar la Opción 2 (Ir al auditorio del colegio).")
+    if opcion3:
+        print("  Se puede realizar la Opción 3 (Ir al cine a ver 'El Coyote vrs Acme').")
+else:
+    print("No se puede realizar ninguna de las actividades")
+
