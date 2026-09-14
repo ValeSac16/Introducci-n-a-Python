@@ -1,16 +1,19 @@
 from eii_utils import limpiar_consola, leer_flotante, leer_entero, leer_booleano
 
-salario_bruto: float = 0
-salario_neto: float = 0
-renta: float = 0
-hijos: int = 0
-tiene_conyuge: bool = True
-creditos: float = 0
+salario_bruto:float = 0
+salario_neto:float = 0
+renta:float = 0
+hijos:int = 0
+tiene_conyuge:bool = True
+creditos:float = 0
+sem:float = 0
+ivm:float = 0
+bp:float = 0
 
 limpiar_consola()
 salario_bruto = leer_flotante("Digite el salario")
 tiene_conyuge = leer_booleano("Tiene conyuge")
-hijos = leer_entero =
+hijos = leer_entero("Digite la cantidad de hijos(as)")
 
 if salario_bruto <= 918_000:
     renta = 0
@@ -22,3 +25,23 @@ elif salario_bruto <= 4_727_000:
     renta = 0 +  42_900 +  152_550 + (salario_bruto-2_364_000)*0.2
 else:
     renta = 0 +  42_900 +  152_550 +  472_600 + (salario_bruto-4_727_000)*0.25
+
+if tiene_conyuge:
+    creditos = 2590
+else:
+    creditos = 0
+
+creditos = creditos + hijos * 1710
+
+if renta >= creditos:
+    renta = renta - creditos
+else:
+    renta = 0
+
+sem = salario_bruto * 0.0583
+ivm = salario_bruto  * 0.0433
+bp = salario_bruto * 0.0067
+
+salario_neto = salario_bruto - renta - sem - ivm - bp
+
+print(salario_neto)
