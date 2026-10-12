@@ -1,0 +1,145 @@
+from eii_utils import leer_entero, leer_booleano, limpiar_consola
+
+limpiar_consola()
+
+# Datos iniciales
+PRECIO_COMPRA = 600
+PRECIO_UNA_BOLSA = 1100
+PRECIO_DOS_BOLSAS = 1700
+PRECIO_TRES_BOLSAS = 2400
+
+# Compra inicial
+bolsas_compradas = input("¿Cuántas bolsas desea comprar María? ")
+
+while not bolsas_compradas.isdigit() or int(bolsas_compradas) <= 0:
+    bolsas_compradas = input("Ingrese una cantidad entera positiva: ")
+
+bolsas_compradas = int(bolsas_compradas)
+
+# Calcular las bolsas adicionales de la promoción
+bolsas_gratis = (bolsas_compradas // 12) * 3
+
+# Calcular el inventario y el costo de la compra
+inventario = bolsas_compradas + bolsas_gratis
+costo_total = bolsas_compradas * PRECIO_COMPRA
+
+# Inicializar los acumuladores
+ingresos_totales = 0
+bolsas_vendidas = 0
+descubierta = False
+
+# Recorrer los dos pisos
+piso = 1
+
+while piso <= 2 and inventario > 0 and not descubierta:
+
+    aula = 1
+
+    # Recorrer las diez aulas del piso
+    while aula <= 10 and inventario > 0 and not descubierta:
+
+        print("\nPiso:", piso, "- Aula:", aula)
+
+        # Verificar si hay personal de seguridad
+        seguridad = input(
+            "¿Hay personal de seguridad cerca? (s/n): "
+        ).strip().lower()
+
+        while seguridad != "s" and seguridad != "n":
+            seguridad = input(
+                "Ingrese s para sí o n para no: "
+            ).strip().lower()
+
+        if seguridad == "s":
+            descubierta = True
+            print("María fue descubierta. La jornada termina.")
+
+        else:
+            # Preguntar si hay clientes interesados
+            respuesta_cliente = input(
+                "¿Hay clientes interesados en comprar? (s/n): "
+            ).strip().lower()
+
+            while respuesta_cliente != "s" and respuesta_cliente != "n":
+                respuesta_cliente = input(
+                    "Ingrese s para sí o n para no: "
+                ).strip().lower()
+
+            # Atender clientes mientras haya interés e inventario
+            while respuesta_cliente == "s" and inventario > 0:
+
+                print("Inventario disponible:", inventario)
+                cantidad = input(
+                    "¿Cuántas bolsas desea comprar el cliente (1, 2 o 3)? "
+                )
+
+                # Validar la cantidad solicitada
+                while (
+                    not cantidad.isdigit()
+                    or int(cantidad) < 1
+                    or int(cantidad) > 3
+                    or int(cantidad) > inventario
+                ):
+                    cantidad = input(
+                        "Cantidad inválida o inventario insuficiente. "
+                        "Ingrese 1, 2 o 3 bolsas disponibles: "
+                    )
+
+                cantidad = int(cantidad)
+
+                # Calcular el precio de la venta
+                if cantidad == 1:
+                    precio_venta = PRECIO_UNA_BOLSA
+                elif cantidad == 2:
+                    precio_venta = PRECIO_DOS_BOLSAS
+                else:
+                    precio_venta = PRECIO_TRES_BOLSAS
+
+                # Actualizar los resultados
+                ingresos_totales = ingresos_totales + precio_venta
+                bolsas_vendidas = bolsas_vendidas + cantidad
+                inventario = inventario - cantidad
+
+                print("Venta realizada.")
+                print("Ingreso de esta venta:", precio_venta)
+                print("Bolsas restantes:", inventario)
+
+                # Consultar si hay otro cliente
+                if inventario > 0:
+                    respuesta_cliente = input(
+                        "¿Hay otro cliente interesado? (s/n): "
+                    ).strip().lower()
+
+                    while (
+                        respuesta_cliente != "s"
+                        and respuesta_cliente != "n"
+                    ):
+                        respuesta_cliente = input(
+                            "Ingrese s para sí o n para no: "
+                        ).strip().lower()
+
+        # Pasar a la siguiente aula
+        aula = aula + 1
+
+    # Pasar al siguiente piso
+    piso = piso + 1
+
+# Calcular la utilidad final
+utilidad_final = ingresos_totales - costo_total
+
+# Mostrar los resultados
+print("\n========== RESUMEN DE LA JORNADA ==========")
+print("Bolsas compradas:", bolsas_compradas)
+print("Bolsas gratis recibidas:", bolsas_gratis)
+print("Bolsas vendidas:", bolsas_vendidas)
+print("Bolsas restantes:", inventario)
+print("Ingresos totales:", ingresos_totales, "colones")
+print("Costo total de compra:", costo_total, "colones")
+print("Utilidad final:", utilidad_final, "colones")
+
+if descubierta:
+    print("Motivo de finalización: María fue descubierta.")
+elif inventario == 0:
+    print("Motivo de finalización: se agotó el inventario.")
+else:
+    print("Motivo de finalización: terminó el recorrido.")

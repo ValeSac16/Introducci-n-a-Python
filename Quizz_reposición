@@ -1,6 +1,6 @@
 #Valeria Sofía Sacahuí Calderón   C6M606
 
-from eii_utils import leer_entero, leer_booleano, leer_flotante, limpiar_consola
+from eii_utils import leer_entero, leer_booleano, limpiar_consola
 
 costo: int = 0
 cantidad_bolsas_compradas: int = 0
@@ -12,10 +12,10 @@ total_bolsas_vendidas: int = 0
 bolsas_restantes: int = 0
 utilidad_final: float = 0
 continua_jornada: True
-piso: int = 0
+piso: int = 0 + 1
 inventario: int = 0
 seguridad: bool = True
-aula: int = 0 + 1
+contador_aula: int = 0
 clientes: bool = True
 compra_cliente: int = 0
 precio: int = 0
@@ -27,16 +27,18 @@ costo = cantidad_bolsas_compradas * 600
 promocion = cantidad_bolsas_compradas // 12
 bolsas_gratis = promocion * 3
 inventario = cantidad_bolsas_compradas + bolsas_gratis
-continua_jornada = True + (seguridad == False)
+continua_jornada = True
 print("La cantidad de bolsas que hay en el inventario es: ", inventario)
 
 Piso = int(input("¿En que piso está? "))
-continua_jornada == True
+continua_jornada == True  + (seguridad == False)
 
-while piso <= 2 and continua_jornada:
 
-    while aula <= 10 and continua_jornada and inventario > 0:
-        print("Piso: ", piso, "Aula: ", aula, "Bolsas disponibles: ", inventario)
+if piso <= 2 and continua_jornada:
+    contador_aula = contador_aula + 1
+
+    while contador_aula <= 10 and continua_jornada and inventario > 0:
+        print("Piso: ", piso, "Aula: ", contador_aula, "Bolsas disponibles: ", inventario)
         seguridad = input("¿Hay seguridad cerca? ")
 
         if seguridad == True:
@@ -54,4 +56,7 @@ while piso <= 2 and continua_jornada:
                   elif compra_cliente == 3:
                     precio = 2400
                   else:
-                      precio = 0    
+                      precio = 0
+        continua_jornada = bool(input("¿La jornada continúa? "))
+else: 
+    print("Fin de la jornada")                      
