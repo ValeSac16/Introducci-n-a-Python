@@ -6,19 +6,22 @@ costo: int = 0
 cantidad_bolsas_compradas: int = 0
 promocion: int = 0
 bolsas_gratis: int = 0
+
+precio_una_bolsa: int = 1100
+precio_dos_bolsas: int = 1700
+precio_tres_bolsas: int = 2400
+
 ingreso_total: int = 0
-bolsas_vendidas_aula: int = 0
-total_bolsas_vendidas: int = 0
+bolsas_vendidas: int = 0
 bolsas_restantes: int = 0
 utilidad_final: float = 0
+
 continua_jornada: True
-piso: int = 0 + 1
+piso: int = 0
 inventario: int = 0
 seguridad: bool = True
-contador_aula: int = 0
 clientes: bool = True
 compra_cliente: int = 0
-precio: int = 0
 
 limpiar_consola()
 
@@ -27,36 +30,17 @@ costo = cantidad_bolsas_compradas * 600
 promocion = cantidad_bolsas_compradas // 12
 bolsas_gratis = promocion * 3
 inventario = cantidad_bolsas_compradas + bolsas_gratis
-continua_jornada = True
-print("La cantidad de bolsas que hay en el inventario es: ", inventario)
 
-Piso = int(input("¿En que piso está? "))
-continua_jornada == True  + (seguridad == False)
+piso = 1
 
+while piso <= 2 and inventario > 0 and not seguridad:
 
-if piso <= 2 and continua_jornada:
-    contador_aula = contador_aula + 1
+    aula = 1
 
-    while contador_aula <= 10 and continua_jornada and inventario > 0:
-        print("Piso: ", piso, "Aula: ", contador_aula, "Bolsas disponibles: ", inventario)
-        seguridad = input("¿Hay seguridad cerca? ")
+    while aula <= 10 and inventario > 0 and not seguridad:
+    
+            print("\nPiso:", piso, "- Aula:", aula)
+            seguridad = input("¿Hay personal de seguridad cerca? ")
 
-        if seguridad == True:
-            continua_jornada = False
-            print("La jornada termina")
-            
-        else:
-            clientes = input("¿Hay clientes en esta aula? ")
-            while clientes == True and inventario > 0:
-                  compra_cliente = int(input("¿Cuántas bolsas quiere comprar el cliente? "))
-                  if compra_cliente == 1:
-                    precio = 1100
-                  elif compra_cliente == 2:
-                    precio = 1700
-                  elif compra_cliente == 3:
-                    precio = 2400
-                  else:
-                      precio = 0
-        continua_jornada = bool(input("¿La jornada continúa? "))
-else: 
-    print("Fin de la jornada")                      
+    if seguridad == True:
+                print("María fue descubierta. La jornada termina.")
