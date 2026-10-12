@@ -1,1 +1,57 @@
 #Valeria Sofía Sacahuí Calderón   C6M606
+
+from eii_utils import leer_entero, leer_booleano, leer_flotante, limpiar_consola
+
+costo: int = 0
+cantidad_bolsas_compradas: int = 0
+promocion: int = 0
+bolsas_gratis: int = 0
+ingreso_total: int = 0
+bolsas_vendidas_aula: int = 0
+total_bolsas_vendidas: int = 0
+bolsas_restantes: int = 0
+utilidad_final: float = 0
+continua_jornada: True
+piso: int = 0
+inventario: int = 0
+seguridad: bool = True
+aula: int = 0 + 1
+clientes: bool = True
+compra_cliente: int = 0
+precio: int = 0
+
+limpiar_consola()
+
+cantidad_bolsas_compradas = int(input("Cantidad de bolsas de plátanos que desea comprar: "))
+costo = cantidad_bolsas_compradas * 600
+promocion = cantidad_bolsas_compradas // 12
+bolsas_gratis = promocion * 3
+inventario = cantidad_bolsas_compradas + bolsas_gratis
+continua_jornada = True + (seguridad == False)
+print("La cantidad de bolsas que hay en el inventario es: ", inventario)
+
+Piso = int(input("¿En que piso está? "))
+continua_jornada == True
+
+while piso <= 2 and continua_jornada:
+
+    while aula <= 10 and continua_jornada and inventario > 0:
+        print("Piso: ", piso, "Aula: ", aula, "Bolsas disponibles: ", inventario)
+        seguridad = input("¿Hay seguridad cerca? ")
+
+        if seguridad == True:
+            continua_jornada = False
+            print("La jornada termina")
+            
+        else:
+            clientes = input("¿Hay clientes en esta aula? ")
+            while clientes == True and inventario > 0:
+                  compra_cliente = int(input("¿Cuántas bolsas quiere comprar el cliente? "))
+                  if compra_cliente == 1:
+                    precio = 1100
+                  elif compra_cliente == 2:
+                    precio = 1700
+                  elif compra_cliente == 3:
+                    precio = 2400
+                  else:
+                      precio = 0    
