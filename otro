@@ -3,69 +3,97 @@ from eii_utils import leer_entero, leer_booleano, limpiar_consola
 limpiar_consola()
 
 # Datos iniciales
-precio_una_bolsa: int = 1100
-precio_dos_bolsas: int = 1700
-precio_tres_bolsas: int = 2400
-
-ingresos_totales: int = 0
-bolsas_vendidas: int = 0
-descubierta: bool = False
-seguridad: bool = False
+PRECIO_COMPRA = 600
+PRECIO_UNA_BOLSA = 1100
+PRECIO_DOS_BOLSAS = 1700
+PRECIO_TRES_BOLSAS = 2400
 
 # Compra inicial
-bolsas_compradas: int = input("¿Cuántas bolsas desea comprar María? ")
-bolsas_compradas: int = int(bolsas_compradas)
-bolsas_gratis: int = (bolsas_compradas // 12) * 3
-cantidad_a_comprar: int = 0
+bolsas_compradas = input("¿Cuántas bolsas desea comprar María? ")
 
-inventario: int = bolsas_compradas + bolsas_gratis
-print("El inventario es de: ", inventario)
-costo_total: int = bolsas_compradas * 600
-print("El costo total de compra es de: ", costo_total)
+while not bolsas_compradas.isdigit() or int(bolsas_compradas) <= 0:
+    bolsas_compradas = input("Ingrese una cantidad entera positiva: ")
+
+bolsas_compradas = int(bolsas_compradas)
+
+# Calcular las bolsas adicionales de la promoción
+bolsas_gratis = (bolsas_compradas // 12) * 3
+
+# Calcular el inventario y el costo de la compra
+inventario = bolsas_compradas + bolsas_gratis
+costo_total = bolsas_compradas * PRECIO_COMPRA
+
+# Inicializar los acumuladores
+ingresos_totales = 0
+bolsas_vendidas = 0
+descubierta = False
 
 # Recorrer los dos pisos
-piso: int = 1
+piso = 1
 
 while piso <= 2 and inventario > 0 and not descubierta:
 
-    aula: int = 1
+    aula = 1
 
     # Recorrer las diez aulas del piso
     while aula <= 10 and inventario > 0 and not descubierta:
 
-        print("Piso:", piso, "- Aula:", aula)
-        seguridad: bool = input("¿Hay personal de seguridad cerca? ")
+        print("\nPiso:", piso, "- Aula:", aula)
 
-        if seguridad == True:
+        # Verificar si hay personal de seguridad
+        seguridad = input(
+            "¿Hay personal de seguridad cerca? (s/n): "
+        ).strip().lower()
+
+        while seguridad != "s" and seguridad != "n":
+            seguridad = input(
+                "Ingrese s para sí o n para no: "
+            ).strip().lower()
+
+        if seguridad == "s":
             descubierta = True
             print("María fue descubierta. La jornada termina.")
 
         else:
-            clientes_interesados = input("¿Hay clientes interesados en comprar? ")
+            # Preguntar si hay clientes interesados
+            respuesta_cliente = input(
+                "¿Hay clientes interesados en comprar? (s/n): "
+            ).strip().lower()
 
-            while clientes_interesados == True and inventario > 0:
+            while respuesta_cliente != "s" and respuesta_cliente != "n":
+                respuesta_cliente = input(
+                    "Ingrese s para sí o n para no: "
+                ).strip().lower()
+
+            # Atender clientes mientras haya interés e inventario
+            while respuesta_cliente == "s" and inventario > 0:
 
                 print("Inventario disponible:", inventario)
-                cantidad_a_comprar = input("¿Cuántas bolsas desea comprar el cliente (1, 2 o 3)? ")
+                cantidad = input(
+                    "¿Cuántas bolsas desea comprar el cliente (1, 2 o 3)? "
+                )
 
+                # Validar la cantidad solicitada
                 while (
-                    not cantidad_a_comprar
-                    or int(cantidad_a_comprar) < 1
-                    or int(cantidad_a_comprar) > 3
-                    or int(cantidad_a_comprar) > inventario):
-                    cantidad_a_comprar = input(
+                    not cantidad.isdigit()
+                    or int(cantidad) < 1
+                    or int(cantidad) > 3
+                    or int(cantidad) > inventario
+                ):
+                    cantidad = input(
                         "Cantidad inválida o inventario insuficiente. "
+                        "Ingrese 1, 2 o 3 bolsas disponibles: "
                     )
 
-                cantidad = int(cantidad_a_comprar)
+                cantidad = int(cantidad)
 
                 # Calcular el precio de la venta
                 if cantidad == 1:
-                    precio_venta = precio_una_bolsa
+                    precio_venta = PRECIO_UNA_BOLSA
                 elif cantidad == 2:
-                    precio_venta = precio_dos_bolsas
+                    precio_venta = PRECIO_DOS_BOLSAS
                 else:
-                    precio_venta = precio_tres_bolsas
+                    precio_venta = PRECIO_TRES_BOLSAS
 
                 # Actualizar los resultados
                 ingresos_totales = ingresos_totales + precio_venta
